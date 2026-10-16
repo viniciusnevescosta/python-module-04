@@ -1,11 +1,9 @@
-from __future__ import annotations
-
 import sys
-from typing import IO
+from typing import TextIO
 
 
 def read_file(file_name: str) -> str | None:
-    archive: IO[str] | None = None
+    archive: TextIO | None = None
     try:
         archive = open(file_name, "r", encoding="utf-8")
         return archive.read()
@@ -25,7 +23,7 @@ def transform_content(content: str) -> str:
 
 
 def save_file(file_name: str, content: str) -> bool:
-    archive: IO[str] | None = None
+    archive: TextIO | None = None
     try:
         archive = open(file_name, "w", encoding="utf-8")
         archive.write(content)
@@ -59,7 +57,11 @@ def main() -> None:
     print("---\n")
     print(transformed, end="")
     print("\n---")
-    destination = input("Enter new file name (or empty): ")
+    try:
+        destination = input("Enter new file name (or empty): ")
+    except EOFError:
+        print("\nNot saving data: input ended.")
+        return
     if destination == "":
         print("Not saving data.")
         return
