@@ -1,9 +1,9 @@
 import sys
-from typing import TextIO
+from typing import IO
 
 
 def read_file(file_name: str) -> str | None:
-    archive: TextIO | None = None
+    archive: IO[str] | None = None
     try:
         archive = open(file_name, "r", encoding="utf-8")
         return archive.read()

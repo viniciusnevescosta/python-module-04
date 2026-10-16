@@ -1,5 +1,5 @@
 import sys
-from typing import TextIO
+from typing import IO
 
 
 def report_error(message: str) -> None:
@@ -7,7 +7,7 @@ def report_error(message: str) -> None:
 
 
 def read_file(file_name: str) -> str | None:
-    archive: TextIO | None = None
+    archive: IO[str] | None = None
     try:
         archive = open(file_name, "r", encoding="utf-8")
         return archive.read()
@@ -27,7 +27,7 @@ def transform_content(content: str) -> str:
 
 
 def save_file(file_name: str, content: str) -> bool:
-    archive: TextIO | None = None
+    archive: IO[str] | None = None
     try:
         archive = open(file_name, "w", encoding="utf-8")
         archive.write(content)
